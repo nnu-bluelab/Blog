@@ -1,0 +1,82 @@
+﻿@model Blog.Model.Blog
+<blockquote class="layui-elem-quote">文章管理</blockquote>
+<div style="padding:10px">
+    <form class="layui-form" action="/Admin/Blog/Add" method="post">
+        @Html.HiddenFor(a => a.Id)
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                @Html.TextBoxFor(a => a.Title, new { placeholder = "请输入标题", @class = "layui-input" })
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属分类：</label>
+            <div class="layui-input-inline">
+                <select name="CaBh" lay-verify="">
+                    <option value=""></option>
+                    @foreach (Blog.Model.Category ca in ViewBag.calist)
+                    {
+                        if (ca.Bh == Model.CaBh)
+                        {
+                            <option value="@ca.Bh" selected="selected">@ca.CaName</option>
+                        }
+                        else
+                        {
+                            <option value="@ca.Bh">@ca.CaName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">内容：</label>
+            <div class="layui-input-block">
+                @Html.TextAreaFor(a => a.Body, new { placeholder = "请输入内容", @class = "layui-textarea" })
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序号</label>
+            <div class="layui-input-inline">
+                @Html.TextBoxFor(a => a.Sort, new { placeholder = "请输入排序号", @class = "layui-input" })
+            </div>
+            <div class="layui-form-mid layui-word-aux">只能为整数，前台从小到大排序</div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" type="submit" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" type="button" lay-submit lay-filter="formDemo" onclick="javascript:history.back(-1);">返回</button>
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    </form>
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script src="~/utf8-net/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script src="~/utf8-net/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('Body');
+    </script>
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+        });
+
+    </script>
+    <style>
+        #edui1 {
+            width:100%!important;
+            z-index: 0!important
+        }
+    </style>
+
+</div>

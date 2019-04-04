@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = Model.Title;
+    Blog.DAL.BlogDAL blogdal = ViewBag.blogdal;
+}
+@model Blog.Model.Blog
+
+<div class="body-wrap">
+    <div id="t_body">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-meta">
+                <a href="/post/ x.Url" class="article-date">
+                    <time datetime=" x.Time.ToString()" itemprop="datePublished">@Model.CreateTime</time>
+                </a>
+            </div>
+            <div class="article-inner">
+                <input type="hidden" class="isFancy" />
+                <header class="article-header">
+                    <h1 itemprop="name">
+                        <a class="article-title" href="/post/ x.Url">@Model.Title</a>
+                    </h1>
+                </header>
+                <div class="article-entry" itemprop="articleBody">
+                    @Html.Raw(Model.Body)
+                </div>
+                <div class="article-info article-info-index">
+                    <div class="article-tag tagcloud">
+                        <ul class="article-tag-list">
+
+                            <li class="article-tag-list-item"><a class="color3">@Model.CaName</a></li>
+                            <li class="article-tag-list-item"><a class="color2" style="cursor:pointer" onclick="javascript: history.go(-1)">返回</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+
+
+</div>
+
+
